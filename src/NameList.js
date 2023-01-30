@@ -1,8 +1,7 @@
 import React from "react";
 
-const names = ["John", "Emily", "Jessica", "Michael", "David", "Sarah", "Daniel", "Brian", "Ashley", "Amy"];
 
-function NameList() {
+function NameList({names}) {
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
       {names.map((name, index) => (

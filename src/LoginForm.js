@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import './LoginForm.css';
-import logo from './logo192.png'
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
@@ -10,6 +9,7 @@ import jwt_decode from 'jwt-decode';
 import {  useNavigate } from 'react-router-dom';
 
 import {UserContext} from './UserContext';
+import FormHeader from './FormHeader';
 
 
 
@@ -62,10 +62,7 @@ const LoginForm = () => {
   //render
   return (
     <div className="login-form-container">
-      <div className="form-header">
-        <h1>Treatment Plan Writer AI <img style={{ width: 32, height: 32, fontSize:'small'}} src={logo} alt='Logo' /></h1>
-        
-      </div>
+      <FormHeader />
 
       <p>Your quick way to for making a treatment plan for your patients.</p>
       

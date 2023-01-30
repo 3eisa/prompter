@@ -5,6 +5,7 @@ import './Writer.css'
 import TextEditor from './TextEditor';
 import { UserContext } from './UserContext';
 import Questions from './Questions';
+import FormHeader from './FormHeader';
 
 export default function Writer() {
 
@@ -26,6 +27,10 @@ export default function Writer() {
     //plan
     const [plan,setPlan] = useState("");
 
+    //
+
+    //names
+    const names = ["John", "Emily", "Jessica", "Michael", "David", "Sarah", "Daniel", "Brian", "Ashley", "Amy"];
     //
 
   return (
@@ -58,8 +63,8 @@ export default function Writer() {
         </div>
 
       <div className="list-container">
-
-        <NameList />
+        <FormHeader />
+        <NameList names={names} />
       </div>
       
       
