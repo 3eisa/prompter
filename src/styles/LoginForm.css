@@ -1,9 +1,16 @@
 .login-form-container {
     width: 25%;
     min-width: 320px;
+    max-width: 400px;
     margin: 0 auto;
     font-family:monospace;
 }
+@media only screen and (min-height: 600px) { 
+    .login-form-container{
+    margin-top: 20vh;
+
+    }
+ }
 
 .form-container label {
     display:block;

@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import './Writer.css'
+import React, {  useState } from 'react'
+import '../styles/Writer.css'
 
+
+//ENV VAR
+const url = 'https://baconipsum.com/api/?type=meat-and-filler'
 
 export default function Questions({setPlan}) {
 
@@ -19,6 +22,7 @@ export default function Questions({setPlan}) {
     ];
       
 
+    //state of answers input 
     const [answers, setAnswers] = useState([]);
     
     const handleChange = (event, index) => {
@@ -27,15 +31,23 @@ export default function Questions({setPlan}) {
         setAnswers(newAnswers);
     };
 
-    const handleSubmit = ()=>{
-        const answer = answers.join(' ');
-        console.log(answer)
-        setPlan(answer)
+    //form submit
+    const handleSubmit = (e)=>{
+        e.preventDefault()
+
+        const fetchData = async ()=>{
+            const result = await fetch(url) //fetch
+
+            result.json().then(json=>{ //parse json
+                setPlan(json.join(' ')) //update value
+            })
+        }
+        fetchData() //call
     }
 
   return (
     <>
-    <form >
+    <form onSubmit={(e)=>handleSubmit(e)}>
         {questions.map((question, index) => (
             <div className="question-container" key={index}>
                 <div className="question">
@@ -54,7 +66,7 @@ export default function Questions({setPlan}) {
             </div>
         ))}
         <div className="question-container">
-        <button className='question-button' onClick={()=>handleSubmit()}>Generate My Plan</button>
+        <button className='question-button' >Generate My Plan</button>
         </div>
     </form>
         </>

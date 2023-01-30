@@ -1,12 +1,13 @@
 import React,{useEffect, useMemo, useState} from 'react';
 import { Route, Routes } from 'react-router-dom';
-import {UserContext} from './UserContext';
 
 import './App.css';
 
-import LoginForm from './LoginForm';
-import Writer from './Writer';
-import ProtectedRoutes from './ProtectedRoutes';
+import {UserContext} from './context/UserContext';
+
+import LoginForm from './pages/LoginForm';
+import Writer from './pages/Writer';
+import ProtectedRoutes from './pages/ProtectedRoutes';
 
 
 
@@ -15,12 +16,13 @@ function App() {
   const [user,setUser] = useState(null);
   //memo for better performance
   const userMemo = useMemo(()=>({user,setUser}),[user,setUser])
+  //
 
-  //debuggin
+  //debugging
   useEffect(()=>{
     console.log(user)
   },[user])
-
+  //
 
 
   return (

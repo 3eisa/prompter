@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import './LoginForm.css';
+import '../styles/LoginForm.css';
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import {  useNavigate } from 'react-router-dom';
 
-import {UserContext} from './UserContext';
-import FormHeader from './FormHeader';
+import {UserContext} from '../context/UserContext';
+import FormHeader from '../components/FormHeader';
 
 
 
@@ -24,10 +24,11 @@ const validationSchema = Yup.object().shape({
 //main func
 const LoginForm = () => {
   
-  //hooks
+  //navigation
   const navigate = useNavigate();
-
-  const {user, setUser} = useContext(UserContext);
+  
+  //state user
+  const { setUser} = useContext(UserContext);
 
   //handles
     //form submit
@@ -35,10 +36,12 @@ const LoginForm = () => {
     console.log("Form Submited: ", values)
   };
 
-  //parse JWT
+  //parse JWT to store user state
   const handleLoginToken = (jwt) => {
-    //change to http cookies
-    window.localStorage.setItem('thwart-token',jwt)
+    //TODO change to http cookies
+
+    //storing cookies in browser
+    window.localStorage.setItem('twoth-token',jwt)
     let pj = jwt_decode(jwt);
 
     setUser({
@@ -52,10 +55,10 @@ const LoginForm = () => {
 
   //check for session
   useEffect(()=>{
-    const token = window.localStorage.getItem('thwart-token')
+    const token = window.localStorage.getItem('twoth-token')
     if (token)
     handleLoginToken(token)
-  },[])
+  })
 
 
 
@@ -118,6 +121,7 @@ const LoginForm = () => {
             }}
             onError={() => {
               console.log('Login Failed')
+              //handle error msg
             }}
           />
         </GoogleOAuthProvider>
