@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React,{useEffect, useMemo, useState} from 'react';
+import { Route, Routes } from 'react-router-dom';
+import {UserContext} from './UserContext';
+
 import './App.css';
 
+import LoginForm from './LoginForm';
+import Writer from './Writer';
+import ProtectedRoutes from './ProtectedRoutes';
+
+
+
 function App() {
+
+  const [user,setUser] = useState(null);
+  //memo for better performance
+  const userMemo = useMemo(()=>({user,setUser}),[user,setUser])
+
+  //debuggin
+  useEffect(()=>{
+    console.log(user)
+  },[user])
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserContext.Provider value={userMemo}>
+        <Routes>
+          <Route path='/login' element={<LoginForm />}></Route>
+          <Route element={<ProtectedRoutes/>}>
+            <Route path='/' element={<Writer />}></Route>
+          </Route>
+        </Routes>
+      </UserContext.Provider>
+
     </div>
   );
 }
