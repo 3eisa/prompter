@@ -7,6 +7,22 @@ The application provides users who have been authenticated with the ability to c
 We will follow its implementation across the various locations.
 
 Starting with the app.js. which is dived by ReactRouter. forcing unauthorized users to login.
+```
+        <Routes>
+
+          <Route path='/login' element={<LoginForm />}></Route>
+
+          <Route element={<ProtectedRoutes/>}>
+
+            <Route path='/' element={<Writer />}></Route>
+
+          </Route>
+           
+        </Routes>
+
+
+        
+```
 
 The ProtectedRoutes component will redirect the user back to login if they are not logged in. otherwise it will show whichever routes are nested within it..
 
